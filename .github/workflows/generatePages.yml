@@ -2,7 +2,7 @@ name: Python Generate Pages
 
 on:
   push:
-    branches: ["develop"]
+    branches: ["main"]
 
 permissions:
   contents: write
@@ -37,5 +37,5 @@ jobs:
           git config --global user.name $USER
           git pull
           git add .
-          git commit -m "Generate HTML pages"
+          git commit -m "[actions]Generate HTML page"
           git push
