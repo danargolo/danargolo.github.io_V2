@@ -37,5 +37,5 @@ jobs:
           git config --global user.name $USER
           git pull
           git add .
-          git commit -m "Generate HTML pages"
+          git commit -m "[actions]Generate HTML page"
           git push
