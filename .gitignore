@@ -1,0 +1,13 @@
+.vscode
+
+/node_modules
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+/index.html
+
+# Environments
+.env
+.venv
