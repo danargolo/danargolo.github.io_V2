@@ -2,7 +2,7 @@ name: Python Generate Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["develop"]
 
 permissions:
   contents: write
