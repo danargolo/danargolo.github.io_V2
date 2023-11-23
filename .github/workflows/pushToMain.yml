@@ -26,3 +26,8 @@ jobs:
       with:
         token: ${{ secrets.TOKEN_PA }}
         delete-branch: true
+    - name: Merge PR
+      uses: peter-evans/enable-pull-request-automerge@v3
+      with:
+        token: ${{ secrets.TOKEN_PA }}
+        pull-request-number: 1
