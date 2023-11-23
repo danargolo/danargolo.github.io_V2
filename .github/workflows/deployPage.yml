@@ -1,5 +1,4 @@
 name: Deploy GitHub Pages
-
 on:
   push:
     branches: ["develop"]
@@ -8,19 +7,14 @@ on:
     workflows: ["Python Generate Pages"]
     types:
       - completed
-
   workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
   id-token: write
-
-
 concurrency:
   group: "pages"
   cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -37,10 +31,9 @@ jobs:
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
-
       - name: Deploy To Main Branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           publish_branch: develop
           publish_dir: ./
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.TOKEN_PA }}
