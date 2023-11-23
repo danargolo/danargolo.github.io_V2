@@ -39,3 +39,14 @@ jobs:
           git add .
           git commit -m "[actions]Generate HTML page"
           git push
+          
+      # - name: Generate Pages
+      #   id: generate-pages
+      #   run: |
+      #     python3 scripts/py/load_json.py
+      #     git config --global user.email $EMAIL
+      #     git config --global user.name $USER
+      #     git pull
+      #     git add .
+      #     git commit -m "[actions]Generate HTML page"
+      #     git push

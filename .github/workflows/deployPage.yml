@@ -43,4 +43,4 @@ jobs:
         with:
           publish_branch: develop
           publish_dir: ./
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.TOKEN_PA }}
