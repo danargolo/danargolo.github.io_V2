@@ -16,6 +16,12 @@ jobs:
       with:
         ref: ${{ github.head_ref }}
         fetch-depth: 0
+    - name: Checkout 
+      run: |
+        python3 scripts/py/load_json.py
+        git config --global user.email $EMAIL
+        git config --global user.name $USER
+        git checkout -b main
     - name: Push changes
       uses: peter-evans/create-pull-request@v5
       with:
