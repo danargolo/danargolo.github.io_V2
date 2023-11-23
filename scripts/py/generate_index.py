@@ -14,17 +14,18 @@ def generate_post_link(file_path):
 
     match_title = re.search(r'<h1>(.*?)<\/h1>', file_content)
     match_content = re.search(r'<p>(.*?)<\/p>', file_content)
-    match_author = re.search(r'<h6>(.*?)<\/h6>', file_content)
+    match_author = re.search(r'<h5>(.*?)<\/h5>', file_content)
 
     post_title = match_title.group(1) if match_title else 'No Title'
     post_content = match_content.group(1) if match_content else 'No Content'
     post_author = match_author.group(1) if match_author else 'No Author'
 
     return (
-        f"""  <article>
-        <a id="title" href="{file_path}"><h3>{post_title}</h3></a>
-        <p>{post_content}.<a href="{file_path}">Continue lendo</a></p>
-        <h6>{post_author}</h6>
+        f"""  <article class="post">
+        <a class="post_title" href="{file_path}"><h3>{post_title}</h3></a>
+        <a href="{file_path}"><p>{post_content[0:150]}...<br/><strong>Continue lendo
+        </strong></a></p>
+        <h5>Author: {post_author}</h5>
       </article><br/>      
     """
     )
@@ -44,14 +45,19 @@ def generate_index():
                     post_path = os.path.join(pasta_mes, post_file)
                     posts = generate_post_link(post_path)
                     posts_contents = posts_contents + posts
+                    # posts_contents += posts
 
-            initial_pos = index_content.find('id="posts">')
+            initial_pos = index_content.find('class="posts">')
             first_half = index_content[0:initial_pos + len('<main id="main">')]
 
             final_pos = index_content.find('</section>')
             last_half = index_content[final_pos:]
             
             index_new = index_new + first_half + posts_contents + last_half
+
+            # index_content = index_content.format(
+            #     posts_contents=posts_contents
+            # )
 
             with open('./index.html', 'w', encoding='utf-8') as index_file:
                 index_file.write(index_new)
