@@ -1,0 +1,27 @@
+name: Push to main
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    env:
+      EMAIL: ${{ secrets.GIT_EMAIL }}
+      USER: ${{ secrets.GIT_USER}}
+      
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Push changes
+        run: |
+          git config --global user.email $EMAIL
+          git config --global user.name $USER
+          git add .
+          git commit -m "Merged changes from develop"
+          git push origin main
