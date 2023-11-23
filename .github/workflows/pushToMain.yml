@@ -26,3 +26,4 @@ jobs:
       uses: peter-evans/create-pull-request@v5
       with:
         token: ${{ secrets.TOKEN_PA }}
+        delete-branch: true
