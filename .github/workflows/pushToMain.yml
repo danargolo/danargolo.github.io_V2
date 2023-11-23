@@ -1,0 +1,23 @@
+name: Push to main
+
+on:
+  push:
+    branches: ["develop"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      EMAIL: ${{ secrets.GIT_EMAIL }}
+      USER: ${{ secrets.GIT_USER}}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+        fetch-depth: 0
+    - name: Push changes
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.TOKEN_PA }}
+        delete-branch: false
