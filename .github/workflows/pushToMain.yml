@@ -16,13 +16,6 @@ jobs:
       with:
         ref: ${{ github.head_ref }}
         fetch-depth: 0
-    - name: Commit files
-      run: |
-        git config --local user.email $EMAIL
-        git config --local user.name $USER
-        git remote set-url --push origin https://$USER:$GITHUB_TOKEN@github.com/danargolo/danargolo.github.io.git
-        git branch
-        git commit -am "Add changes"
     - name: Push changes
       uses: peter-evans/create-pull-request@v5
       with:
