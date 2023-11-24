@@ -3,7 +3,7 @@ name: Push to main
 on:
   push:
     branches: ["develop"]
-    paths: '/content'
+    paths: ['**.json','**.md']
 
 permissions:
   pull-requests: write
@@ -16,7 +16,7 @@ jobs:
     env:
       EMAIL: ${{ secrets.GIT_EMAIL }}
       USER: ${{ secrets.GIT_USER}}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
     - uses: actions/checkout@v3
       with:
