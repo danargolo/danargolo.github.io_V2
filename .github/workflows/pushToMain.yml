@@ -3,6 +3,7 @@ name: Push to main
 on:
   push:
     branches: ["develop"]
+    paths: '/content'
 
 permissions:
   pull-requests: write
