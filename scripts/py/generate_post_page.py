@@ -8,7 +8,7 @@ def generate_post_page(post):
 
     current_date = datetime.now()
     year_folder = current_date.strftime('%Y')
-    month_folder = current_date.strftime('%b')
+    month_folder = current_date.strftime('%m')
 
     folder_path = os.path.join('posts', year_folder, month_folder)
     os.makedirs(folder_path, exist_ok=True)
@@ -19,7 +19,7 @@ def generate_post_page(post):
     template_content = template_content.format(
         post_title=post['title'],
         post_content=post['content'],
-        date_time=current_date.strftime('%a %d %b %Y, %I:%M%p'),
+        date_time=current_date.strftime('%a %d %m %Y, %I:%M%p'),
         post_author=post['author']
         )
 
