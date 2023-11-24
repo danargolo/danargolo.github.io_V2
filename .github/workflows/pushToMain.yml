@@ -3,7 +3,7 @@ name: Push to main
 on:
   push:
     branches: ["develop"]
-    paths: 'post_data.json'
+    paths: ['**.json','**.md']
 
 permissions:
   pull-requests: write
