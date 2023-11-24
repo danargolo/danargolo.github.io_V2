@@ -3,7 +3,7 @@ name: Push to main
 on:
   push:
     branches: ["develop"]
-    
+
 permissions:
   pull-requests: write
   issues: write
@@ -29,6 +29,6 @@ jobs:
     - name: Push changes
       uses: peter-evans/create-pull-request@v5
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.TOKEN_PA }}
         labels: automerge
         delete-branch: true
