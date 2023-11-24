@@ -24,6 +24,6 @@ jobs:
     - name: Push changes
       uses: peter-evans/create-pull-request@v5
       with:
-        token: ${{ secrets.TOKEN_PA }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         labels: automerge
         delete-branch: true
