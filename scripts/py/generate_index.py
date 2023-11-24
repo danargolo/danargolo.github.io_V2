@@ -2,11 +2,7 @@ import os
 import re
 
 posts_folder = './posts'
-template_path = './templates/index.html'
-
-with open(template_path, 'r', encoding='utf-8') as template_file:
-    index_content = template_file.read()
-
+template_index_path = './templates/index.html'
 
 def generate_post_link(file_path):
     with open(file_path, 'r', encoding='utf-8') as post_file:
@@ -32,7 +28,6 @@ def generate_post_link(file_path):
 
 def generate_index():
     posts_contents = ''
-    index_new = ''
 
     for ano in os.listdir(posts_folder):
         pasta_ano = os.path.join(posts_folder, ano)
@@ -44,22 +39,15 @@ def generate_index():
                 if post_file.endswith('.html'):
                     post_path = os.path.join(pasta_mes, post_file)
                     posts = generate_post_link(post_path)
-                    posts_contents = posts_contents + posts
-                    # posts_contents += posts
-
-            initial_pos = index_content.find('class="posts">')
-            first_half = index_content[0:initial_pos + len('<main id="main">')]
-
-            final_pos = index_content.find('</section>')
-            last_half = index_content[final_pos:]
+                    posts_contents += posts
             
-            index_new = index_new + first_half + posts_contents + last_half
-
-            # index_content = index_content.format(
-            #     posts_contents=posts_contents
-            # )
-
-            with open('./index.html', 'w', encoding='utf-8') as index_file:
-                index_file.write(index_new)
-
+    with open(template_index_path, 'r', encoding='utf-8') as template_file:
+        index_content = template_file.read()
+        
+        index_content = index_content.format(
+                posts_section=posts_contents
+            )
+        
+    with open('./index.html', 'w', encoding='utf-8') as index_file:
+        index_file.write(index_content)
     print('Index created.')

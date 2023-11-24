@@ -11,8 +11,10 @@ def generate_post_page(post):
     month_folder = current_date.strftime('%b')
 
     folder_path = os.path.join('posts', year_folder, month_folder)
-
     os.makedirs(folder_path, exist_ok=True)
+
+    file_name = f"post_{current_date.strftime('%Y%m%d_%H%M')}.html"
+    file_path = os.path.join(folder_path, file_name)
 
     template_content = template_content.format(
         post_title=post['title'],
@@ -20,10 +22,6 @@ def generate_post_page(post):
         date_time=current_date.strftime('%a %d %b %Y, %I:%M%p'),
         post_author=post['author']
         )
-
-    file_name = f"post_{current_date.strftime('%Y%m%d_%H%M')}.html"
-
-    file_path = os.path.join(folder_path, file_name)
 
     with open(file_path, 'w') as html_file:
         html_file.write(template_content)
