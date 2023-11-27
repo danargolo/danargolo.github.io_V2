@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Blog</title>
+  <script src=""></script>
+  <link rel="stylesheet" href="/styles/global.css">
+  <link rel="stylesheet" href="/styles/posts.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+      </ul>
+    </nav>  
+  </header>
+  <main>
+    <div class="container">
+      <section class=post>
+        <div class="title">
+          <p id="title">Meu Blog</p>
+          <p id="subtitle">Um blog automatizado para expressar as inquietudes da mente.</p>
+        </div>
+        <h1>Projeto Automação de Blog</h1>
+
+<h3>Descrição do que será realizado no Projeto:</h3>
+
+<p>Utilizaremos da linguagem <em>Python</em> para leitura dos dados de um arquivo <em>markdown</em> e um arquivo <em>JSON</em>, gerando uma página <em>index.html</em> estático, onde subiremos ao Git Pages. 
+O arquivo <em>markdown</em> terá o conteúdo da nossa página e o <em>JSON</em> as informações de título, descrição e autores. 
+Para realizarmos tudo isso, faremos a instalação do Git Flow para configuração de um fluxo de trabalho onde criaremos uma branch de desenvolvimento (<em>develop</em>) e também criaremos um ambiente virtual (<em>venv</em>) para isolarmos o nosso projeto. 
+No Github usaremos o Actions para automatizar a cada <em>push</em> a atualização da nossa página hospedada no Git Pages.</p>
+
+<h3>Instalação e Execução do Git Flow:</h3>
+
+<pre><code>sudo apt-get install git-flow
+git flow init
+</code></pre>
+
+<h3>Foi criado uma nova branch para desenvolvimento do projeto:</h3>
+
+<pre><code>git branch -l
+* develop
+main
+
+git checkout develop
+</code></pre>
+
+<h3>Arquivos utilizados:</h3>
+
+<ul>
+<li><strong>Markdown:</strong> wiki.md (conteúdo escrito em md);</li>
+<li><strong>JSON:</strong> config.json (título, descrição e autores);</li>
+<li><strong>HTML:</strong> layout.html (template) e index.html (escrito a partir do script.py);</li>
+<li><strong>Python:</strong> script.py (responsável em escrever nosso index.html a partir dos outros arquivos).</li>
+</ul>
+
+<h3>Criação de um Ambiente Virtual:</h3>
+
+<p><strong>Para isolarmos as dependências do projeto de modo que cada projeto tenha suas bibliotecas separadas do sistema principal, criamos um ambiente virtual:</strong></p>
+
+<pre><code>python3 -m venv venv
+</code></pre>
+
+<p><strong>Ativamos nosso ambiente virtual (linux):</strong></p>
+
+<pre><code>source venv/bin/activate
+</code></pre>
+
+<p><strong>Instalamos as bibliotecas que utilizaremos no Script:</strong></p>
+
+<pre><code>pip install jinja2 markdown2
+</code></pre>
+
+<h3>Script em Python:</h3>
+
+<pre><code>from markdown2 import markdown 
+from jinja2 import Environment, FileSystemLoader
+from json import load
+
+template_env = Environment(loader=FileSystemLoader(searchpath='./'))
+template = template_env.get_template('layout.html')
+
+with open('wiki.md') as markdown_file:
+    wiki = markdown(
+        markdown_file.read(),
+        extras=['fenced-code-blocks', 'code-friendly'])
+
+with open('config.json') as config_file:
+    config = load(config_file)
+
+with open('index.html', 'w') as output_file:
+    output_file.write(
+        template.render(
+            title=config['title'],
+            description=config['description'],
+            authors=config['authors'],
+            wiki=wiki
+        )
+    )
+</code></pre>
+
+<p><author>Breno, Christopher, Danilo, Isaac, Victor </author></p>
+
+      </section>
+      <aside style="display: flex; justify-content: right;">
+        <img style="border: 2px solid rgb(233, 234, 240);" src="" alt="">
+        <div id="card">
+          <h3>Danilo Argolo</h3>
+          <h5>Front-End Developer</h5>
+          <ul id="link">
+            <li><a href="https://www.github.com/danargolo" target="_blank">Github</a></li>
+            <li><a href="https://www.linkedin.com/in/danargolo" target="_blank">Linkedin</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <footer>
+    <p>Desenvolvido por DanArgolo.Dev</p>
+  </footer>
+</body>
+</html>
