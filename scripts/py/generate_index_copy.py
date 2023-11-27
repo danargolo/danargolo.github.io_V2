@@ -1,9 +1,16 @@
 import os
 import re
+
 from format import format_header
+
 
 posts_folder = './posts'
 template_index_path = './templates/index.html'
+
+styles = {
+    "page": 'index',
+    "class": 'posts'
+}
 
 def generate_post_link(file_path):
     with open(file_path, 'r', encoding='utf-8') as post_file:
@@ -11,7 +18,7 @@ def generate_post_link(file_path):
 
     match_title = re.search(r'<h1>(.*?)<\/h1>', file_content)
     match_content = re.search(r'<p>(.*?)<\/p>', file_content, re.DOTALL)
-    match_author = re.search(r'<h5>(.*?)<\/h5>', file_content)
+    match_author = re.search(r'<author>(.*?)<\/author>', file_content)
 
     post_title = match_title.group(1) if match_title else 'No Title'
     post_content = match_content.group(1) if match_content else 'No Content'
@@ -19,9 +26,9 @@ def generate_post_link(file_path):
 
     return (
     f"""<article class="post">
-        <a class="post_title" href="{file_path}"><h3>{post_title}</h3></a>
-        <a href="{file_path}"><p>{post_content[0:150]}...<br/><strong>Continue lendo
-        </strong></a></p>
+        <h3 class="post_title"><a href="{file_path}">{post_title}</a></h3>
+        <p>{post_content[0:500]}...<br/><strong>Continue lendo
+        </strong></p>
         <h5>Author: {post_author}</h5>
       </article>
       """)
@@ -42,6 +49,10 @@ def generate_index(config):
                     posts_contents += posts
         
     with open('./index.html', 'w', encoding='utf-8') as index_file:
-        index_file.write(format_header(config['configs'], posts_contents))
+        index_file.write(format_header(
+            config['configs'], 
+            posts_contents,
+            styles
+            ))
 
     print('Index created.')

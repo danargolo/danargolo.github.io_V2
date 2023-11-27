@@ -1,16 +1,76 @@
-## Teste
+#Projeto Automação de Blog
+### Descrição do que será realizado no Projeto:
+Utilizaremos da linguagem *Python* para leitura dos dados de um arquivo *markdown* e um arquivo *JSON*, gerando uma página *index.html* estático, onde subiremos ao Git Pages. 
+O arquivo *markdown* terá o conteúdo da nossa página e o *JSON* as informações de título, descrição e autores. 
+Para realizarmos tudo isso, faremos a instalação do Git Flow para configuração de um fluxo de trabalho onde criaremos uma branch de desenvolvimento (*develop*) e também criaremos um ambiente virtual (*venv*) para isolarmos o nosso projeto. 
+No Github usaremos o Actions para automatizar a cada *push* a atualização da nossa página hospedada no Git Pages.
 
-<article>Novo teste Danilo Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. 
-Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. 
+### Instalação e Execução do Git Flow:
+```
+sudo apt-get install git-flow
+git flow init
+```
 
-Curabitur ullamcorper ultricies nisi. Nam eget dui. 
+### Foi criado uma nova branch para desenvolvimento do projeto:
+```bash
+git branch -l
+* develop
+main
 
-Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. 
+git checkout develop
+```
 
-Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac
+### Arquivos utilizados:
+- **Markdown:** wiki.md (conteúdo escrito em md);
+- **JSON:** config.json (título, descrição e autores);
+- **HTML:** layout.html (template) e index.html (escrito a partir do script.py);
+- **Python:** script.py (responsável em escrever nosso index.html a partir dos outros arquivos).
 
-</article>
+### Criação de um Ambiente Virtual:
+**Para isolarmos as dependências do projeto de modo que cada projeto tenha suas bibliotecas separadas do sistema principal, criamos um ambiente virtual:**
 
+```python
+python3 -m venv venv
+```
 
-### Danilo
+**Ativamos nosso ambiente virtual (linux):**
+```bash
+source venv/bin/activate
+```
+
+**Instalamos as bibliotecas que utilizaremos no Script:**
+```python
+pip install jinja2 markdown2
+```
+
+### Script em Python:
+```python
+from markdown2 import markdown 
+from jinja2 import Environment, FileSystemLoader
+from json import load
+
+template_env = Environment(loader=FileSystemLoader(searchpath='./'))
+template = template_env.get_template('layout.html')
+
+with open('wiki.md') as markdown_file:
+    wiki = markdown(
+        markdown_file.read(),
+        extras=['fenced-code-blocks', 'code-friendly'])
+
+with open('config.json') as config_file:
+    config = load(config_file)
+
+with open('index.html', 'w') as output_file:
+    output_file.write(
+        template.render(
+            title=config['title'],
+            description=config['description'],
+            authors=config['authors'],
+            wiki=wiki
+        )
+    )
+```
+
+<author>*Danilo Argolo*</author>
+
 

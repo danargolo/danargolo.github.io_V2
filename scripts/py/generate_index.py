@@ -20,9 +20,9 @@ def generate_post_link(file_path):
     return (
     f"""
         <article class="post">
-            <a class="post_title" href="{file_path}"><h3>{post_title}</h3></a>
-            <a href="{file_path}"><p>{post_content[0:150]}...<br/><strong>Continue lendo
-            </strong></a></p>
+            <h3><a class="post_title" href="{file_path}">{post_title}</a></h3>
+            <p>{post_content[0:150]}...<br/><strong>Continue lendo
+            </strong></p>
             <h5>Author: {post_author}</h5>
         </article>"""
     )

@@ -1,4 +1,4 @@
-def format_header(config, content):
+def format_header(config, content, style):
   return(
     f"""<!DOCTYPE html>
 <html lang="en">
@@ -7,12 +7,11 @@ def format_header(config, content):
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{config['title']}</title>
   <script src=""></script>
-  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="/styles/global.css">
+  <link rel="stylesheet" href="/styles/{style['page']}.css">
 </head>
 <body>
   <header>
-    <h1 id="title">{config['title']}</h1>
-    <h6 style="display:flex; justify-content: center;">{config['description']}</h6>
     <nav>
       <ul>
         <li><a href="/">Home</a></li>
@@ -21,7 +20,11 @@ def format_header(config, content):
   </header>
   <main>
     <div class="container">
-      <section class="posts">
+      <section class={style['class']}>
+        <div class="title">
+          <p id="title">{config['title']}</p>
+          <p id="subtitle">{config['description']}</p>
+        </div>
         {content}
       </section>
       <aside style="display: flex; justify-content: right;">
@@ -37,6 +40,9 @@ def format_header(config, content):
       </aside>
     </div>
   </main>
+  <footer>
+    <p>{config['message_footer']}</p>
+  </footer>
 </body>
 </html>"""
   )
