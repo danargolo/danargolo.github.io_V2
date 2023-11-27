@@ -1,4 +1,4 @@
-def format_header(config, posts):
+def format_header(config, content):
   return(
     f"""<!DOCTYPE html>
 <html lang="en">
@@ -20,20 +20,22 @@ def format_header(config, posts):
     </nav>  
   </header>
   <main>
-    <section class="posts">
-      {posts}
-    </section>
-    <aside style="display: flex; justify-content: right;">
-      <img style="border: 2px solid rgb(233, 234, 240);" src="" alt="">
-      <div id="card">
-        <h3>{config['author']}</h3>
-        <h5>{config['occupation']}</h5>
-        <ul id="link">
-          <li><a href="{config['links']['github']}" target="_blank">Github</a></li>
-          <li><a href="{config['links']['linkedin']}" target="_blank">Linkedin</a></li>
-        </ul>
-      </div>
-    </aside>
+    <div class="container">
+      <section class="posts">
+        {content}
+      </section>
+      <aside style="display: flex; justify-content: right;">
+        <img style="border: 2px solid rgb(233, 234, 240);" src="" alt="">
+        <div id="card">
+          <h3>{config['author']}</h3>
+          <h5>{config['occupation']}</h5>
+          <ul id="link">
+            <li><a href="{config['links']['github']}" target="_blank">Github</a></li>
+            <li><a href="{config['links']['linkedin']}" target="_blank">Linkedin</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
   </main>
 </body>
 </html>"""

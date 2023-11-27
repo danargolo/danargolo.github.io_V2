@@ -34,6 +34,12 @@ nav ul {
 main {
   display: flex;
   width: 100vw;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  width: 60%;
 }
 
 .posts {
@@ -48,7 +54,7 @@ main {
   grid-row: span 1; /* Ocupa uma linha */
 }
 
-.posts .post:nth-child(2) {
+.posts .post:nth-child(2n+1) {
   border: 2px solid red;
 }
 

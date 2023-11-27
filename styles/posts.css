@@ -1,15 +1,6 @@
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-family:'Roboto Serif', Georgia, Times, serif;
-}
-
 main {
-  position: relative;
-  margin: 10px;
-  width: 60%;
-  left: 15%;
+  display: flex;
+  width: 100vw;
 }
 
 p {

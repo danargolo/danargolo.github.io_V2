@@ -42,6 +42,6 @@ def generate_index(config):
                     posts_contents += posts
         
     with open('./index.html', 'w', encoding='utf-8') as index_file:
-        index_file.write(format_header(config, posts_contents))
+        index_file.write(format_header(config['configs'], posts_contents))
 
     print('Index created.')
