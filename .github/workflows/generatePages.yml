@@ -32,7 +32,8 @@ jobs:
       - name: Generate Pages
         id: generate-pages
         run: |
-          pip install markdown
+          pip install --upgrade pip
+          pip install markdown2
           python3 scripts/py/load_json.py
           git config --global user.email $EMAIL
           git config --global user.name $USER
