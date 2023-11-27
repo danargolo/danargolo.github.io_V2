@@ -1,16 +1,18 @@
-<!DOCTYPE html>
+def format_header(config, posts):
+  return(
+    f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title}</title>
+  <title>{config['title']}</title>
   <script src=""></script>
   <link rel="stylesheet" href="/styles/index.css">
 </head>
 <body>
   <header>
-    <h1 id="title">{title}</h1>
-    <h6 style="display:flex; justify-content: center;">{description}</h6>
+    <h1 id="title">{config['title']}</h1>
+    <h6 style="display:flex; justify-content: center;">{config['description']}</h6>
     <nav>
       <ul>
         <li><a href="/">Home</a></li>
@@ -19,19 +21,20 @@
   </header>
   <main>
     <section class="posts">
-      {posts_section}
+      {posts}
     </section>
     <aside style="display: flex; justify-content: right;">
       <img style="border: 2px solid rgb(233, 234, 240);" src="" alt="">
       <div id="card">
-        <h3>{author}</h3>
-        <h5>{occupation}</h5>
+        <h3>{config['author']}</h3>
+        <h5>{config['occupation']}</h5>
         <ul id="link">
-          <li><a href="{github}" target="_blank">Github</a></li>
-          <li><a href="{linkedin}" target="_blank">Linkedin</a></li>
+          <li><a href="{config['links']['github']}" target="_blank">Github</a></li>
+          <li><a href="{config['links']['linkedin']}" target="_blank">Linkedin</a></li>
         </ul>
       </div>
     </aside>
   </main>
 </body>
-</html>
+</html>"""
+  )

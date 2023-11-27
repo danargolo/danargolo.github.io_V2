@@ -1,4 +1,5 @@
 import os
+import re
 from generate_index import generate_index
 from datetime import datetime
 
@@ -16,11 +17,24 @@ def generate_post_page(post):
     file_name = f"post_{current_date.strftime('%Y%m%d_%H%M')}.html"
     file_path = os.path.join(folder_path, file_name)
 
+    match_title = re.search(r'<h2>(.*?)<\/h2>', post)
+    match_content = re.compile(r'<article>(.*?)<\/article>', re.DOTALL).findall(post)
+    match_author = re.search(r'<h3>(.*?)<\/h3>', post)
+
+
+    matches_br = match_content[0].replace('\n', '<br>')
+    formated_paragraphs = re.sub(r'(<br>\s*){2}', '</p> <p>', matches_br)
+   
+
+    post_title = match_title.group(1) if match_title else 'No Title'
+    post_author = match_author.group(1) if match_author else 'No Author'
+    
+
     template_content = template_content.format(
-        post_title=post['title'],
-        post_content=post['content'],
+        post_title=post_title,
+        post_content=formated_paragraphs,
         date_time=current_date.strftime('%a %d %m %Y, %I:%M%p'),
-        post_author=post['author']
+        post_author=post_author
         )
 
     with open(file_path, 'w') as html_file:
