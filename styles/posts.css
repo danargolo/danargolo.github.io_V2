@@ -1,8 +1,9 @@
-main {
+.container {
   display: flex;
-  width: 100vw;
+  width: 60%;
+  background-color: #ecf2f8;
 }
 
-p {
-  text-indent: 40px;
+.title {
+  display: none;
 }

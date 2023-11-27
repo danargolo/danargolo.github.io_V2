@@ -1,0 +1,17 @@
+{
+  "name": "Project_BlogAssembler",
+  "version": "1.0.0",
+  "description": "Descrição do seu projeto",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "npm run git-pull && npm run git-commit-push",
+    "load-json": "./scripts/py/load_json.py",
+    "git-pull": "git pull origin main",
+    "git-commit-push": "git commit -am 'Post Deploy' && git push -u origin main"
+  },
+  "dependencies": {
+    "eslint": "8.39.0"
+  },
+  "author": "Danilo Argolo",
+  "license": "MIT"
+}
