@@ -27,4 +27,3 @@ def generate_post_page(post):
         html_file.write(template_content)
     print(f'{file_name} created.')
     
-    generate_index()

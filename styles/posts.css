@@ -1,13 +1,8 @@
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-family:'Roboto Serif', Georgia, Times, serif;
+main {
+  display: flex;
+  width: 100vw;
 }
 
-main {
-  position: relative;
-  margin: 10px;
-  width: 60%;
-  left: 15%;
+p {
+  text-indent: 40px;
 }
