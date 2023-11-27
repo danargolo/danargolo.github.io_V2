@@ -71,6 +71,6 @@ with open('index.html', 'w') as output_file:
     )
 ```
 
-<author>Breno, Christopher, Danilo, Isaac, Victor</author>
+<author>Breno, Christopher, Danilo, Isaac, Victor </author>
 
 
